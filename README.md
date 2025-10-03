@@ -76,3 +76,28 @@ pip install -r requirements.txt
 Open the notebook:
 
 jupyter notebook ag_news_nb_lr.ipynb
+with open("README.md", "a", encoding="utf-8") as f:
+    f.write("""
+
+## 🔍 Usage Example
+
+You can test the saved model on your own text:
+
+```python
+import joblib
+
+# Load model and vectorizer
+model = joblib.load("agnews_model.pkl")
+tfidf = joblib.load("agnews_tfidf.pkl")
+
+# Example input
+text = ["The stock market is looking strong today with major gains in tech."]
+
+# Transform and predict
+X = tfidf.transform(text)
+prediction = model.predict(X)
+
+# Class labels
+labels = ['World', 'Sports', 'Business', 'Sci/Tech']
+print("Predicted class:", labels[prediction[0]])
+
