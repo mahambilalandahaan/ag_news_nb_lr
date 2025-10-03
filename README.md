@@ -1,89 +1,61 @@
-AG News Text Classification
+# AG News Classification: Naive Bayes & Logistic Regression
 
-This project implements text classification on the AG News dataset
- using Naive Bayes and Logistic Regression with TF-IDF and Count Vectorizer.
+This project implements **text classification** on the AG News dataset using **Naive Bayes** and **Logistic Regression** with both **CountVectorizer** and **TF-IDF** features.  
+It includes model evaluation metrics, confusion matrices, and saved models for reuse.
 
-📌 Dataset
+---
 
-AG News dataset: A collection of over 120,000 news articles categorized into 4 classes:
+## ✅ Results
 
-🌍 World
+| Model | Accuracy | F1 Score | Precision | Recall | ROC-AUC |
+|-------|----------|----------|-----------|--------|---------|
+| MultinomialNB_counts | 0.87 | 0.87 | 0.87 | 0.87 | 0.95 |
+| MultinomialNB_tfidf | 0.88 | 0.88 | 0.88 | 0.88 | 0.96 |
+| LogisticRegression_counts | 0.91 | 0.91 | 0.91 | 0.91 | 0.97 |
+| LogisticRegression_tfidf | 0.92 | 0.92 | 0.92 | 0.92 | 0.98 |
 
-🏅 Sports
+### JSON Snippet of Results
 
-💼 Business
-
-💻 Sci/Tech
-
-⚙️ Preprocessing
-
-Convert text to lowercase
-
-Remove punctuation and special characters
-
-Apply TF-IDF and Count Vectorizer (max 3000 features, unigrams + bigrams)
-
-🧠 Models Trained
-
-Multinomial Naive Bayes (NB)
-
-Logistic Regression (LR)
-
-Each model was trained with both Count Vectorizer and TF-IDF.
-
-📊 Evaluation Metrics
-
-For each model, the following metrics are calculated:
-
-Accuracy
-
-Precision (weighted)
-
-Recall (weighted)
-
-F1 Score (weighted)
-
-ROC-AUC (One-vs-Rest)
-
-Confusion matrices are also plotted for all models.
-
-✅ Results (Sample Output)
-Model	Accuracy	F1 Score	Precision	Recall	ROC-AUC
-Naive Bayes (Count)	0.87	0.87	0.87	0.87	0.95
-Naive Bayes (TFIDF)	0.88	0.88	0.88	0.88	0.96
-Logistic Regression (Count)	0.91	0.91	0.91	0.91	0.97
-Logistic Regression (TFIDF)	0.92	0.92	0.92	0.92	0.98
-
-(Logistic Regression with TF-IDF performed best ✅)
-
-💾 Saving Models
-
-Trained models and vectorizers are saved with joblib for later use:
-
-agnews_model.pkl
-
-agnews_tfidf.pkl
-
-agnews_cv.pkl
-
-🚀 How to Run
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-
-Open the notebook:
-
-jupyter notebook ag_news_nb_lr.ipynb
-with open("README.md", "a", encoding="utf-8") as f:
-    f.write("""
-
-## 🔍 Usage Example
-
+```json
+[
+  {
+    "model": "MultinomialNB_counts",
+    "accuracy": 0.87,
+    "f1_score": 0.87,
+    "precision": 0.87,
+    "recall": 0.87,
+    "roc_auc_score": 0.95
+  },
+  {
+    "model": "MultinomialNB_tfidf",
+    "accuracy": 0.88,
+    "f1_score": 0.88,
+    "precision": 0.88,
+    "recall": 0.88,
+    "roc_auc_score": 0.96
+  },
+  {
+    "model": "LogisticRegression_counts",
+    "accuracy": 0.91,
+    "f1_score": 0.91,
+    "precision": 0.91,
+    "recall": 0.91,
+    "roc_auc_score": 0.97
+  },
+  {
+    "model": "LogisticRegression_tfidf",
+    "accuracy": 0.92,
+    "f1_score": 0.92,
+    "precision": 0.92,
+    "recall": 0.92,
+    "roc_auc_score": 0.98
+  }
+]
+🔍 Usage Example
 You can test the saved model on your own text:
 
-```python
+python
+Copy code
 import joblib
 
 # Load model and vectorizer
@@ -100,4 +72,59 @@ prediction = model.predict(X)
 # Class labels
 labels = ['World', 'Sports', 'Business', 'Sci/Tech']
 print("Predicted class:", labels[prediction[0]])
+Expected Output:
 
+cpp
+Copy code
+Predicted class: Business
+📦 Dataset
+The AG News dataset consists of 120,000 training samples and 7,600 test samples across 4 categories:
+
+World
+
+Sports
+
+Business
+
+Sci/Tech
+
+📝 Preprocessing
+Convert text to lowercase
+
+Remove punctuation
+
+Vectorize text using CountVectorizer and TF-IDF
+
+Consider unigram and bigram features
+
+🛠 Models Trained
+Multinomial Naive Bayes (Counts & TF-IDF)
+
+Logistic Regression (Counts & TF-IDF)
+
+📂 Saved Models
+agnews_model.pkl → trained classifier
+
+agnews_tfidf.pkl → TF-IDF vectorizer
+
+agnews_cv.pkl → CountVectorizer
+
+🎯 Evaluation
+Models are evaluated using:
+
+Accuracy
+
+F1 Score
+
+Precision
+
+Recall
+
+ROC-AUC Score
+
+Confusion Matrix visualization
+
+✅ Notes
+High-level performance observed for Logistic Regression with TF-IDF.
+
+Models are ready to be deployed or reused in other projects.
